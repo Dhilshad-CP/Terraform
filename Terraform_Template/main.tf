@@ -1,6 +1,4 @@
-############################
 # Networking – VPC & Subnets
-############################
 
 resource "aws_vpc" "main" {
   cidr_block           = var.vpc_cidr
@@ -76,9 +74,7 @@ resource "aws_route_table_association" "public_assoc" {
   route_table_id = aws_route_table.public_rt.id
 }
 
-############################
 # Security Groups
-############################
 
 # EC2 SG – SSH + outbound internet
 resource "aws_security_group" "ec2_sg" {
@@ -132,9 +128,8 @@ resource "aws_security_group" "rds_sg" {
   }
 }
 
-############################
 # EC2 Instance (Public)
-############################
+
 
 data "aws_ami" "ubuntu" {
   most_recent = true
@@ -160,9 +155,9 @@ resource "aws_instance" "app" {
   }
 }
 
-############################
+
 # RDS – MySQL in Private Subnet
-############################
+
 
 resource "aws_db_subnet_group" "db_subnets" {
   name = "${var.project_name}-db-subnet-group"
